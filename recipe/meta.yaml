@@ -6,23 +6,23 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/napari-blob-detection-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/napari-blob-detection-{{ version }}.tar.gz
   sha256: a036c6f05e852ca0d332358249ec6c442c1ebdb83781e0609d9b146990e6f938
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
     - pip
-    - python >=3.8
+    - python {{ python_min }}
   run:
     - magicgui
     - napari >=0.4.13
     - numpy
-    - python >=3.8
+    - python >={{ python_min }}
     - scikit-image
 
 test:
@@ -33,6 +33,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/andy-sweet/napari-blob-detection
